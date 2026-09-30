@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Xe Điện Nông Sản – Prototype</title>
+<style>
+:root{--g:#16a34a;--gd:#15803d;--gl:#dcfce7;--s:#0f172a;--m:#64748b;--b:#e2e8f0;--a:#f59e0b;--r:#dc2626;--bg:#f0fdf4;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--s);font-size:14px}
+button{font-family:inherit}
+.card{background:#fff;border:1px solid var(--b);border-radius:14px;padding:12px;margin-bottom:10px}
+.btn{background:var(--g);color:#fff;border:0;border-radius:12px;padding:12px 14px;font-weight:700;font-size:15px;cursor:pointer;width:100%}
+.btn.o{background:#fff;color:var(--gd);border:1.5px solid var(--g)}
+.btn.r{background:var(--r)}.btn.a{background:var(--a);color:#000}
+.btn:disabled{opacity:.45}
+.m{color:var(--m);font-size:12px;margin-top:2px}
+.w{width:100%;display:block}
+.top{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:10px 14px;background:#fff;border-bottom:1px solid var(--b);position:sticky;top:0;z-index:5}
+.top b{color:var(--gd);margin-right:8px}
+.tab{border:1px solid var(--b);background:#fff;border-radius:999px;padding:7px 14px;font-weight:600;cursor:pointer;color:var(--s)}
+.tab.on{background:var(--g);border-color:var(--g);color:#fff}
+.stage{display:flex;justify-content:center;padding:16px}
+.phone{position:relative;width:390px;max-width:100%;height:760px;background:#fff;border:8px solid var(--s);border-radius:36px;overflow:hidden}
+.guest .phone{width:100%;max-width:480px;height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));border:0;border-radius:0}
+.guest .stage{padding:0}
+.scr{height:calc(100% - 56px);overflow:auto}
+.scr.nn{height:100%}
+.hd{background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;padding:18px 16px}
+.hd .big{font-size:19px;font-weight:800}
+.badge{display:inline-block;margin-top:10px;background:#fff;color:var(--gd);border-radius:999px;padding:6px 12px;font-weight:700;font-size:12px}
+.p{padding:14px}
+.cta{width:100%;background:var(--g);color:#fff;border:0;border-radius:16px;padding:20px 14px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 6px 16px rgba(22,163,74,.3);margin-bottom:12px}
+.nav{position:absolute;bottom:0;left:0;right:0;height:56px;display:flex;border-top:1px solid var(--b);background:#fff}
+.nav button{flex:1;border:0;background:#fff;font-weight:600;color:var(--m);cursor:pointer}
+.nav button.on{color:var(--g)}
+.ov{position:absolute;inset:0;background:rgba(15,23,42,.5);display:flex;align-items:flex-end;z-index:9}
+.sheet{background:#fff;width:100%;border-radius:20px 20px 0 0;padding:18px;max-height:92%;overflow:auto}
+.sheet.c{border-radius:20px;margin:16px;width:auto;align-self:center}
+label{display:block;font-weight:600;margin:10px 0 4px;font-size:13px}
+select,input{width:100%;padding:11px;border:1px solid var(--b);border-radius:10px;font-size:15px;background:#fff;font-family:inherit}
+.sug{background:var(--gl);color:var(--gd);border-radius:10px;padding:10px;font-weight:700;margin-top:10px}
+.bar2{height:8px;background:var(--b);border-radius:9px;margin:10px 0;overflow:hidden}
+.bar2 i{display:block;height:100%;background:var(--g)}
+.trk{position:relative;height:26px;margin-top:6px}.trk span{position:absolute;transition:left 1s;font-size:20px;transform:translateX(-50%)}
+.tabs{display:flex;border-bottom:1px solid var(--b);background:#fff;position:sticky;top:0}
+.tabs button{flex:1;padding:12px 4px;border:0;background:#fff;font-weight:700;color:var(--m);border-bottom:3px solid transparent;cursor:pointer;font-size:13px}
+.tabs button.on{color:var(--gd);border-color:var(--g)}
+.opt{border:2px solid var(--b);border-radius:12px;padding:10px;margin-bottom:8px;cursor:pointer}
+.opt.on{border-color:var(--g);background:var(--gl)}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between}
+.pill{border-radius:999px;padding:3px 10px;font-size:12px;font-weight:700;background:var(--gl);color:var(--gd)}
+.pill.r{background:#fee2e2;color:var(--r)}.pill.a{background:#fef3c7;color:#b45309}
+.adm{display:grid;grid-template-columns:190px 1fr;min-height:calc(100vh - 60px)}
+.side{background:#fff;border-right:1px solid var(--b);padding:14px}
+.side div{padding:9px 10px;border-radius:9px;font-weight:600;color:var(--m);margin-bottom:4px}
+.side div.on{background:var(--gl);color:var(--gd)}
+.main{padding:16px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.g2{display:grid;grid-template-columns:1.5fr 1fr;gap:12px}
+.kpi b{display:block;font-size:26px;color:var(--gd)}
+.dsp{cursor:pointer;border:2px solid var(--b);border-radius:12px;padding:10px;margin-bottom:8px}
+.dsp.on{border-color:var(--g);background:var(--gl)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--s);color:#fff;padding:10px 16px;border-radius:12px;z-index:99;font-weight:600}
+.dv{background:#fff}.dv .card{border:2px solid var(--s)}.dv .btn{font-size:17px;padding:15px}
+.land{padding:28px 20px;text-align:center}
+.land .btn{padding:24px 14px;font-size:18px;margin-top:14px}
+.pad{border:2px dashed var(--m);border-radius:12px;height:110px;display:flex;align-items:center;justify-content:center;color:var(--m);cursor:pointer}
+.hdr{background:#15803d;color:#fff;padding:14px;font-weight:800;font-size:16px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:10px;background:#fff;border-bottom:2px solid #0f172a;position:sticky;top:0;z-index:3}
+.chip{white-space:nowrap;border:2px solid #0f172a;background:#fff;border-radius:999px;padding:8px 12px;font-weight:700;font-size:13px;cursor:pointer;color:#0f172a}
+.chip.on{background:#16a34a;border-color:#15803d;color:#fff}
+.stop{display:flex;gap:10px;align-items:center;padding:9px 0;border-top:1px solid #e2e8f0}
+.stop .no{width:28px;height:28px;border-radius:50%;background:#e2e8f0;display:flex;align-items:center;justify-content:center;font-weight:800;flex:none}
+.stop.ok .no{background:#16a34a;color:#fff}.stop.nx .no{background:#f59e0b}
+.warn{background:#fef3c7;border-color:#b45309!important}
+.btn.big{font-size:17px;padding:18px 14px;margin-bottom:6px}
+.tabs2{display:flex;gap:6px;margin-bottom:10px}
+.tabs2 button{flex:1;border:2px solid #0f172a;background:#fff;border-radius:10px;padding:9px 6px;font-weight:700;font-size:12px;cursor:pointer;color:#0f172a}
+.tabs2 button.on{background:#16a34a;color:#fff;border-color:#15803d}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.g3>div{background:#f0fdf4;border-radius:10px;padding:8px;text-align:center}.g3 b{font-size:20px}
+@media(max-width:860px){.adm{grid-template-columns:1fr}.side{display:none}.g4{grid-template-columns:1fr 1fr}.g2{grid-template-columns:1fr}}
+</style><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script></head>
+<body><div id="app"></div><div id="toast"></div>
+<script>
+const $=s=>document.querySelector(s),P=(v,a,b)=>Math.max(a,Math.min(b,v));
+const HASH=location.hash.slice(1);let HOST=HASH==='host';
+let S={pk:[0,0,0],mt:0,dd:0,ch:0,dsig:0,dpd:0,dc:0,q:location.origin+location.pathname,ok:0,pin:0,r:(HASH==='farmer'||HASH==='buyer')?HASH:null,t:'admin',ft:'home',bt:'market',dt:0,m:null,fo:null,fp:0,qr:0,bo:null,bp:0,cold:0,sig:0,pod:0,sc:[0,0,0],temp:5.4,hist:[4.8,5,5.2,5.1,5.4,5.3,5.5,5.4],hot:0,sel:null,tick:0,bq:'mid',n:{sell:0,ord:0,ship:0,pod:0},logs:[],f:{fruit:'Thanh Long',kg:800,time:'06:00'}};
+const log=(x,t)=>{S.logs.unshift(new Date(t||Date.now()).toLocaleTimeString('vi-VN')+' · '+x);S.logs=S.logs.slice(0,6)};
+const toast=x=>{$('#toast').innerHTML='<div class="toast">'+x+'</div>';setTimeout(()=>$('#toast').innerHTML='',2200)};
+const set=o=>{Object.assign(S,o);draw()};
+const sug=()=>'Cần '+Math.max(1,Math.ceil(S.f.kg/400))+'x xe điện 3 bánh';
+function qr(seed){let x=0;for(const c of seed)x=(x*31+c.charCodeAt(0))>>>0;let r='';const n=21;for(let i=0;i<n;i++)for(let j=0;j<n;j++){const u=(i<7&&j<7)?[i,j]:(i<7&&j>13)?[i,j-14]:(i>13&&j<7)?[i-14,j]:null;let on;if(u)on=u[0]%6==0||u[1]%6==0||(u[0]>1&&u[0]<5&&u[1]>1&&u[1]<5);else{x=(x*1103515245+12345)>>>0;on=(x>>16)&1}if(on)r+=`<rect x="${j}" y="${i}" width="1" height="1"/>`}return `<svg viewBox="-1 -1 23 23" style="width:150px;background:#fff;padding:4px;border:1px solid #e2e8f0;border-radius:8px">${r}</svg>`}
+function ch(d,w=300,h=110){const px=i=>10+i*(w-20)/(d.length-1),py=v=>h-8-v*(h-16)/12;return `<svg viewBox="0 0 ${w} ${h}" class="w"><line x1="10" x2="${w-10}" y1="${py(8)}" y2="${py(8)}" stroke="#dc2626" stroke-dasharray="4"/><text x="${w-12}" y="${py(8)-3}" font-size="9" fill="#dc2626" text-anchor="end">8°C</text><polyline fill="none" stroke="#16a34a" stroke-width="2.5" points="${d.map((v,i)=>px(i)+','+py(v)).join(' ')}"/></svg>`}
+/* ---------- NÔNG DÂN ---------- */
+function farmer(){const o=S.fo,p=S.fp;
+const trk=o?`<div class="card"><div class="row"><b>Đơn ${o.id}</b><span class="pill">${p<100?'Đang tới':'Đã tới vườn'}</span></div><div class="m">${o.fruit} · ${o.kg}kg · ${o.n}x xe điện 3 bánh · Thu hoạch ${o.time}</div><div class="trk"><span style="left:${P(p,4,96)}%">🛺</span></div><div class="bar2"><i style="width:${p}%"></i></div><div class="m">${p<100?'ETA còn ~'+Math.ceil((100-p)/8)+' phút':'Xe đã đến, sẵn sàng bốc hàng'}</div>
+<button class="btn o" style="margin-top:10px" onclick="set({qr:!S.qr})">${S.qr?'Thu gọn':'Xem'} Tem QR Truy Xuất</button>
+${S.qr?`<div style="text-align:center;margin-top:10px">${qr(o.id)}<div class="m">Lô ${o.id} · Tọa độ vườn: 10.3521°N, 106.3574°E<br>Nguồn gốc: Vườn Bác Ba · ${o.fruit}</div></div>`:''}</div>`:'';
+let body;
+if(S.ft==='home')body=`<div class="hd"><div style="opacity:.9">Xin chào bác Ba 👋</div><div class="big">Chúc bác một mùa vụ bội thu!</div><div class="badge">🌱 Tác Động Xanh: Bạn đã tiết kiệm 120kg CO₂!</div></div><div class="p"><button class="cta" onclick="set({m:'book'})">＋ Đặt Xe Thu Gom 3 Bánh Tại Vườn</button><div class="card"><div class="row"><span>Đơn đã đặt hôm nay</span><b>${S.n.sell}</b></div><div class="m">Xe điện — không khói, không tiếng ồn, vào tận vườn</div></div>${trk}</div>`;
+else body=`<div class="hd"><div class="big">Đơn của tôi</div></div><div class="p">${trk||'<div class="card m">Chưa có đơn. Hãy đặt xe thu gom ở Trang chủ.</div>'}</div>`;
+const modal=S.m==='book'?`<div class="ov"><div class="sheet"><div class="row"><b style="font-size:17px">Đặt xe thu gom</b><button class="tab" onclick="set({m:null})">✕</button></div>
+<label>Loại trái cây</label><select onchange="S.f.fruit=this.value">${['Thanh Long','Sầu Riêng','Xoài Cát','Bưởi Da Xanh'].map(x=>`<option ${x==S.f.fruit?'selected':''}>${x}</option>`).join('')}</select>
+<label>Khối lượng ước tính (kg)</label><input type="number" min="50" value="${S.f.kg}" oninput="S.f.kg=+this.value||0;$('#sg').textContent=sug()">
+<label>Giờ thu hoạch</label><input type="time" value="${S.f.time}" onchange="S.f.time=this.value">
+<div class="sug">🛺 <span id="sg">${sug()}</span> được gợi ý tự động</div>
+<button class="btn" style="margin-top:14px" onclick="book()">Xác nhận đặt xe</button></div></div>`:'';
+return `<div class="scr" data-s>${body}</div><div class="nav"><button class="${S.ft=='home'?'on':''}" onclick="set({ft:'home'})">🏠 Trang chủ</button><button class="${S.ft=='order'?'on':''}" onclick="set({ft:'order'})">📦 Đơn của tôi</button></div>${modal}`}
+function book(){const n=Math.max(1,Math.ceil(S.f.kg/400));S.fo={...S.f,n,id:'NS'+Math.floor(1000+Math.random()*9000)};S.fp=0;S.qr=0;emit({type:'sell',kg:S.f.kg,fruit:S.f.fruit});toast('Đã đặt xe thành công!');set({m:null,ft:'order'})}
+/* ---------- NGƯỜI MUA ---------- */
+const PR=[['Thanh Long ruột đỏ','Vườn Bác Ba','32.000đ/kg','500kg'],['Sầu riêng Ri6','HTX Cai Lậy','95.000đ/kg','300kg'],['Xoài cát Hòa Lộc','Vườn Cô Sáu','45.000đ/kg','800kg']];
+const CD=[4.2,4.6,5,5.3,5.1,6.2,6.8,6.1,5.4,5.2,5,4.9];
+function buyer(){let b;
+if(S.bt==='market')b=`<div class="p"><b>Dịch vụ vận chuyển</b><div style="margin-top:8px"><div class="opt ${S.bq=='mid'?'on':''}" onclick="set({bq:'mid'})"><b>🚚 Xe tải trung EV</b><div class="m">Giao nội vùng 50–150km, thẳng tới cửa hàng</div></div><div class="opt ${S.bq=='long'?'on':''}" onclick="set({bq:'long'})"><b>🚛 Container EV đường dài</b><div class="m">Liên tỉnh, lạnh liên tục, có ký quỹ</div></div></div>
+${PR.map((x,i)=>`<div class="card"><div class="row"><b>${x[0]}</b><span class="pill">${x[3]}</span></div><div class="m">${x[1]} · ${x[2]}</div><button class="btn" style="margin-top:8px" onclick="order(${i})">Đặt hàng + vận chuyển</button></div>`).join('')}</div>`;
+else if(S.bt==='ship'){const o=S.bo;if(!o)b='<div class="p"><div class="card m">Chưa có chuyến hàng. Hãy đặt hàng ở tab Chợ.</div></div>';
+else if(S.pod)b=`<div class="p" style="text-align:center"><div style="font-size:56px">✅</div><h3>Nhận hàng thành công!</h3><div class="card">e-POD đã ký · Ký quỹ: <span class="pill">Đã giải ngân cho nông dân</span></div><div class="m">Chuyến ${o.id} hoàn tất</div></div>`;
+else{const p=S.bp,mn=Math.ceil((100-p)*0.9);b=`<div class="p"><div class="card"><div class="row"><b>${o.name}</b><span class="pill">${o.type=='mid'?'Xe tải trung EV':'Container EV'}</span></div><svg viewBox="0 0 300 80" class="w"><path d="M20 55 Q100 10 170 45 T280 30" fill="none" stroke="#cbd5e1" stroke-width="4" stroke-dasharray="6"/><text x="6" y="72" font-size="10">Hub</text><text x="262" y="20" font-size="10">Cửa hàng</text><text x="${20+p*2.5}" y="${50-Math.sin(p/100*Math.PI)*12}" font-size="20">🚚</text></svg>
+<div class="bar2"><i style="width:${p}%"></i></div><div class="row"><b>ETA: ${p<100?mn+' phút':'Đã đến'}</b><span class="m">${Math.round(p)}%</span></div></div>
+<div class="card"><div class="row"><span>Ký quỹ</span><span class="pill a">Đang giữ ký quỹ</span></div></div>
+<button class="btn" onclick="set({m:'pod',sig:0})">Xác Nhận Nhận Hàng (e-POD)</button></div>`}}
+else b=`<div class="p"><div class="card"><b>Sổ Lạnh Số</b><div class="m">Nhiệt độ liên tục từ vườn tới cửa hàng</div><button class="btn o" style="margin-top:10px" onclick="set({cold:!S.cold})">${S.cold?'Ẩn':'Xem Sổ Nhiệt Độ IoT'}</button></div>${S.cold?`<div class="card">${ch(CD)}<div class="row m"><span>Vườn</span><span>Hub</span><span>Cửa hàng</span></div><div style="margin-top:8px"><span class="pill">Không vượt 8°C · Đạt chuẩn chuỗi lạnh</span></div></div>`:''}</div>`;
+const modal=S.m==='pod'?`<div class="ov"><div class="sheet"><b style="font-size:17px">Xác nhận nhận hàng</b><div class="m">Ký tên vào ô bên dưới</div><div class="pad" style="margin:10px 0" onclick="set({sig:1})">${S.sig?'<svg viewBox="0 0 160 50" width="160"><path d="M5 35 C20 5 30 45 45 20 S70 40 85 15 S120 45 155 10" fill="none" stroke="#0f172a" stroke-width="2.5"/></svg>':'✍️ Chạm để ký'}</div><button class="btn" ${S.sig?'':'disabled'} onclick="podOk()">Xác nhận & giải ngân ký quỹ</button><button class="btn o" style="margin-top:8px" onclick="set({m:null})">Hủy</button></div></div>`:'';
+return `<div class="tabs"><button class="${S.bt=='market'?'on':''}" onclick="set({bt:'market'})">🛒 Chợ</button><button class="${S.bt=='ship'?'on':''}" onclick="set({bt:'ship'})">📍 Chuyến hàng</button><button class="${S.bt=='cold'?'on':''}" onclick="set({bt:'cold'})">❄️ Sổ lạnh</button></div><div class="scr" style="height:calc(100% - 44px)" data-s>${b}</div>${modal}`}
+function order(i){S.bo={id:'DH'+Math.floor(100+Math.random()*900),name:PR[i][0],type:S.bq};S.bp=0;S.pod=0;emit({type:'order',name:PR[i][0],kind:S.bq});toast('Đã đặt hàng, ký quỹ ký quỹ');set({bt:'ship'})}
+function podOk(){S.pod=1;emit({type:'pod'});set({m:null})}
+/* ---------- TÀI XẾ ---------- */
+const DM=['🛺 Xe 3 Bánh Điện (Chặng Gom)','🚚 Xe Tải Điện Trung (Nội Vùng)','🚛 Xe Container Điện (Chặng Xa)'];
+const HDR=['Tài xế 3 Bánh: Nguyễn Văn A - Xe #03','Tài xế Xe Tải Trung 3.5 Tấn - Biển số 65E-123.45','Tài xế Đầu Kéo Container - Mã Chuyến: CN-2026-88'];
+const ST3=[['Vườn ông Hai','Thanh Long',60,'3,1 km'],['Vườn cô Ba','Xoài cát',70,'5,4 km'],['Vườn chú Tám','Bưởi da xanh',40,'7,8 km']];
+const MT=[[['Hub Chợ Gạo','Thanh Long ruột đỏ · 1,2 tấn','Ghép từ 3 xe 3 bánh · nhận tại bến số 2'],['Hub Chợ Gạo','Xoài cát · 0,9 tấn','Ghép từ 2 xe 3 bánh · nhận tại bến số 3']],[['Siêu thị Vĩnh Long','Thanh Long · 800 kg','Cự ly 78 km · giao trước 14:30'],['Cửa hàng Mỹ Tho','Xoài cát · 500 kg','Cự ly 54 km · giao trước 16:00']]];
+const DC=[['📄 Tờ Khai Hải Quan',[['Hàng hóa','Thanh long tươi (bảo quản lạnh)'],['Khối lượng','18,5 tấn'],['Niêm phong','#SEAL-992831'],['Trạng thái','Đã khai báo điện tử']]],['🩺 Giấy Kiểm Dịch',[['Loại','Kiểm dịch thực vật'],['Kết quả','Đạt yêu cầu'],['Hiệu lực','Đến hết chuyến đi']]],['🔳 Mã QR Thông Quan Nhanh',[]]];
+const RT=`<svg viewBox="0 0 320 130" class="w"><rect width="320" height="130" rx="10" fill="#ecfccb"/><path d="M15 95 L305 35" fill="none" stroke="#dc2626" stroke-width="3" stroke-dasharray="5 5"/><path d="M15 95 Q110 128 175 100 T305 35" fill="none" stroke="#16a34a" stroke-width="5"/><text x="100" y="62" font-size="16">⛔</text><text x="70" y="52" font-size="9" font-weight="700" fill="#dc2626">Cầu hạn chế 20 tấn</text><text x="205" y="56" font-size="16">⛔</text><text x="178" y="46" font-size="9" font-weight="700" fill="#dc2626">Cầu thấp 4,2 m</text><text x="45" y="118" font-size="16">⚡</text><text x="62" y="122" font-size="9" font-weight="700">Sạc siêu nhanh · 45 km</text><text x="235" y="88" font-size="16">⚡</text><text x="252" y="92" font-size="9" font-weight="700">120 km</text><circle cx="15" cy="95" r="6" fill="#0f172a"/><circle cx="305" cy="35" r="6" fill="#0f172a"/></svg>`;
+function dm(i){S.dt=i;S.ch=0;draw();const e=$('[data-s]');if(e)e.scrollTop=0}
+function scan(){const i=S.pk.indexOf(0);if(i<0)return toast('Đã gom đủ hàng, hãy chở về trạm');S.pk[i]=1;log('Tài xế 3 bánh bốc hàng tại '+ST3[i][0]);toast('✅ Đã xác nhận bốc hàng: '+ST3[i][0]);draw()}
+function dpodOk(){S.dpd++;emit({type:'pod'});toast('✅ Đã nghiệm thu giao hàng');set({m:null})}
+function driver(){const d=S.dt;let b='';
+const chips=`<div class="chips"><span style="align-self:center;font-weight:800;white-space:nowrap;font-size:12px">LOẠI PHƯƠNG TIỆN:</span>${DM.map((x,i)=>`<button class="chip ${d==i?'on':''}" onclick="dm(${i})">${x}</button>`).join('')}</div>`;
+if(d==0){const kg=420+ST3.reduce((a,x,i)=>a+(S.pk[i]?x[2]:0),0),nx=S.pk.indexOf(0),pc=Math.round(kg/6),hi=kg>=570;
+b=`<div class="card"><b>📍 Lộ Trình Gom Đơn AI</b><div class="m">Cự ly gom 3–8 km · thứ tự điểm dừng tối ưu</div>${ST3.map((x,i)=>`<div class="stop ${S.pk[i]?'ok':i==nx?'nx':''}"><span class="no">${S.pk[i]?'✓':i+1}</span><div style="flex:1"><b>${x[0]}</b><div class="m">${x[1]} · ${x[2]} kg · ${x[3]}</div></div><span class="pill ${S.pk[i]?'':i==nx?'a':''}">${S.pk[i]?'Đã bốc':i==nx?'Kế tiếp':'Chờ'}</span></div>`).join('')}</div>
+<div class="card"><div class="row"><b>⚖️ Tải Trọng Thực Tế</b><b style="color:${hi?'#b45309':'#15803d'}">${pc}%</b></div><div class="bar2" style="height:16px"><i style="width:${pc}%;background:${hi?'#f59e0b':'#16a34a'}"></i></div><b>Đã xếp ${kg} kg / Tối đa 600 kg</b></div>
+<button class="btn big" onclick="scan()" ${nx<0?'disabled':''}>📷 QUÉT MÃ QR BỐC HÀNG TẠI VƯỜN</button><div class="m" style="text-align:center;margin:0 0 10px">${nx<0?'Đã gom đủ hàng, hãy chở về trạm trung chuyển':'Điểm kế tiếp: '+ST3[nx][0]}</div>
+<div class="card warn"><b>⚠️ Cảnh báo địa hình</b><div>Lưu ý: Cầu ngõ vườn ông Hai đường hẹp, giữ tốc độ dưới 15km/h.</div></div>`}
+else if(d==1){const T=S.mt,t=(3.5+Math.sin(S.tick)*.1).toFixed(1);
+b=`<div class="tabs2"><button class="${T==0?'on':''}" onclick="set({mt:0})">Lệnh Nhận Hàng Tại Hub (Cross-docking)</button><button class="${T==1?'on':''}" onclick="set({mt:1})">Lệnh Giao Trực Tiếp Người Mua Nội Vùng</button></div>${MT[T].map(x=>`<div class="card"><div class="row"><b>${x[0]}</b><span class="pill a">Chờ xử lý</span></div><div>${x[1]}</div><div class="m">${x[2]}</div></div>`).join('')}
+<div class="card"><b>❄️ Giám Sát Thùng Lạnh Cabin</b><div class="g3" style="grid-template-columns:1fr 1fr"><div><div class="m">Nhiệt độ</div><b style="color:#15803d">${t}°C</b></div><div><div class="m">Độ ẩm</div><b>85%</b></div></div><span class="pill" style="display:inline-block;margin-top:8px">✅ Chuỗi lạnh Đạt Chuẩn</span></div>
+<div class="card"><div class="row"><b>🔋 Điều Hướng EV · Pin (SOC)</b><b style="font-size:26px;color:#15803d">68%</b></div><div class="bar2" style="height:14px"><i style="width:68%"></i></div><div class="row"><span>Quãng đường còn lại</span><b>45 km</b></div><button class="btn a" style="margin-top:10px" onclick="set({ch:!S.ch})">⚡ TÌM TRẠM SẠC EV NỘI VÙNG NEARBY</button>${S.ch?`<div class="sug" style="background:#fef3c7;color:#92400e">⚡ Trạm sạc EV Vĩnh Long · cách 6,2 km · 2 cổng trống · 60 kW<br>⚡ Trạm sạc EV Mỹ Tho · cách 18 km · 1 cổng trống</div>`:''}</div>
+<button class="btn big" onclick="set({m:'dpod',dsig:0})">✍️ XÁC NHẬN GIAO HÀNG (e-POD)</button>${S.dpd?`<div class="m" style="text-align:center;margin-bottom:10px">Đã nghiệm thu ${S.dpd} đơn</div>`:''}`}
+else{const X=[['Cảng Cát Lái, TP.HCM','~170 km',222],['Cửa Khẩu Hữu Nghị, Lạng Sơn','~1.800 km',2460]][S.dd],rem=Math.max(0,X[2]-S.tick),t=(4+Math.sin(S.tick)*.1).toFixed(1);
+b=`<div class="card"><b>🧭 Bảng Điều Khiển Lệnh Chuyến Đi</b><div class="m" style="margin-top:8px">Điểm đi</div><b>DC Kho Tổng Cần Thơ</b><div class="m" style="margin-top:6px">Điểm đến</div><div style="display:flex;gap:6px;margin:4px 0 8px"><button class="chip ${S.dd==0?'on':''}" onclick="set({dd:0})">Cảng Cát Lái</button><button class="chip ${S.dd==1?'on':''}" onclick="set({dd:1})">Cửa Khẩu Hữu Nghị</button></div><div class="row"><div><div class="m">${X[0]}</div><b>${X[1]}</b></div><div style="text-align:right"><div class="m">ETA còn lại</div><b style="font-size:22px;color:#15803d">${Math.floor(rem/60)}g ${String(rem%60).padStart(2,'0')}p</b></div></div><span class="pill" style="display:inline-block;margin-top:8px">🔒 Niêm phong #SEAL-992831</span></div>
+<div class="card"><b>❄️ Trung Tâm Vi Khí Hậu Reefer</b><div class="g3"><div><div class="m">Nhiệt độ</div><b style="color:#15803d">${t}°C</b></div><div><div class="m">Khí Ethylene</div><b>0,4 ppm</b></div><div><div class="m">Pin phụ (AUX)</div><b>88%</b></div></div><span class="pill" style="display:inline-block;margin-top:8px">✅ Chuỗi lạnh Đạt Chuẩn</span></div>
+<div class="card"><b>🗺️ Điều Hướng Xe Tải Nặng & Sạc Siêu Nhanh</b><div style="margin-top:8px">${RT}</div><div class="m" style="margin-top:6px">🟢 Tuyến an toàn cho xe nặng · ⛔ Cầu hạn chế tải trọng/chiều cao · ⚡ Trạm sạc siêu nhanh</div></div>
+<div class="card"><b>📁 Kho Hồ Sơ Điện Tử</b>${DC.map((x,i)=>`<button class="btn o" style="margin-top:8px" onclick="set({m:'doc',dc:${i}})">${x[0]}</button>`).join('')}</div>`}
+let modal='';
+if(S.m==='sos')modal=`<div class="ov"><div class="sheet c" style="text-align:center"><div style="font-size:48px">🚨</div><h3 style="color:#dc2626">Đã gửi tín hiệu SOS</h3><div class="m">Trung tâm điều hành đã nhận vị trí của bạn và đang điều xe hỗ trợ.</div><button class="btn" style="margin-top:14px" onclick="set({m:null})">Đóng</button></div></div>`;
+if(S.m==='dpod')modal=`<div class="ov"><div class="sheet"><b style="font-size:17px">Nghiệm thu giao hàng (e-POD)</b><div class="m">Người nhận ký tên vào ô bên dưới</div><div class="pad" style="margin:10px 0" onclick="set({dsig:1})">${S.dsig?'<svg viewBox="0 0 160 50" width="160"><path d="M5 35 C20 5 30 45 45 20 S70 40 85 15 S120 45 155 10" fill="none" stroke="#0f172a" stroke-width="2.5"/></svg>':'✍️ Chạm để ký'}</div><button class="btn" ${S.dsig?'':'disabled'} onclick="dpodOk()">Xác nhận giao hàng</button><button class="btn o" style="margin-top:8px" onclick="set({m:null})">Hủy</button></div></div>`;
+if(S.m==='doc'){const x=DC[S.dc];modal=`<div class="ov"><div class="sheet"><b style="font-size:17px">${x[0]}</b><div class="m">Bản xem trước · dữ liệu mẫu</div><div style="margin:12px 0">${S.dc==2?`<div style="text-align:center">${qr('SEAL-992831')}<div class="m">Đưa mã này cho cán bộ cửa khẩu để thông quan nhanh</div></div>`:x[1].map(r=>`<div class="row" style="padding:8px 0;border-top:1px solid #e2e8f0"><span class="m">${r[0]}</span><b>${r[1]}</b></div>`).join('')}</div><button class="btn" onclick="set({m:null})">Đóng</button></div></div>`}
+return `<div class="scr nn dv" data-s><div class="hdr">${HDR[d]}</div>${chips}<div class="p">${b}<button class="btn r" onclick="set({m:'sos'})">🆘 NÚT SOS KHẨN CẤP</button></div></div>${modal}`}
+/* ---------- ADMIN ---------- */
+const V=[[120,200,'#16a34a',82,'3B'],[250,120,'#16a34a',64,'3B'],[340,210,'#f59e0b',71,'TR'],[470,90,'#0ea5e9',55,'CT']];
+const D=[['#A101','Thanh Long · 3 vườn ghép','Chợ Gạo → Hub',0,[300,150,'Hub Chợ Gạo'],'Cross-docking: ghép 3 điểm gom → 1 tuyến, tiết kiệm 22km'],['#A102','Sầu riêng · Cai Lậy','Hub → Vĩnh Long',2,[520,220,'Siêu thị VL'],'Cross-docking: chờ 12 phút để đủ tải 85%'],['#A103','Xoài cát · liên tỉnh','Hub → Cát Lái',3,[560,50,'Cảng Cát Lái'],'Cross-docking: sẵn sàng, tải 92%']];
+function admin(){const t=S.tick,sel=S.sel!==null?D[S.sel]:null;
+const veh=V.map((v,i)=>{const x=v[0]+Math.sin(t/3+i)*10,y=v[1]+Math.cos(t/3+i)*6;return `<g><circle cx="${x}" cy="${y}" r="8" fill="${v[2]}" stroke="#fff" stroke-width="2"/><rect x="${x-16}" y="${y+10}" width="32" height="14" rx="4" fill="#0f172a"/><text x="${x}" y="${y+21}" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">${v[3]}%</text><text x="${x}" y="${y+3}" font-size="7" fill="#fff" text-anchor="middle" font-weight="700">${v[4]}</text></g>`}).join('');
+let route='';if(sel){const v=V[sel[3]];route=`<polyline points="${v[0]},${v[1]} ${(v[0]+sel[4][0])/2},${v[1]-30} ${sel[4][0]},${sel[4][1]}" fill="none" stroke="#dc2626" stroke-width="3" stroke-dasharray="7 4"/><circle cx="${sel[4][0]}" cy="${sel[4][1]}" r="8" fill="#dc2626"/><text x="${sel[4][0]}" y="${sel[4][1]-12}" font-size="11" text-anchor="middle" font-weight="700">${sel[4][2]}</text>`}
+const alert=S.temp>8;
+return `<div class="adm"><div class="side"><div class="on">📊 Điều hành</div><div>🗺️ Đội xe</div><div>❄️ Chuỗi lạnh</div><div>🌿 ESG</div></div><div class="main">
+<div class="g4" style="margin-bottom:12px">${[['Đăng ký bán',S.n.sell],['Đơn đặt hàng',S.n.ord],['Chuyến vận chuyển',S.n.ship],['e-POD hoàn tất',S.n.pod]].map(x=>`<div class="card kpi"><span class="m">${x[0]}</span><b>${x[1]}</b><span class="pill">● Trực tiếp</span></div>`).join('')}</div>
+<div class="g2"><div><div class="card"><div class="row"><b>Bản đồ đội xe trực tiếp</b><span class="m">🟢 3 bánh · 🟠 Xe tải trung · 🔵 Container</span></div><svg viewBox="0 0 600 280" class="w" style="background:#ecfccb;border-radius:10px;margin-top:8px"><path d="M0 240 Q150 180 300 230 T600 190" fill="none" stroke="#7dd3fc" stroke-width="18" opacity=".7"/><path d="M0 100 L200 150 L300 150 L520 220 M300 150 L560 50" fill="none" stroke="#fff" stroke-width="6"/><circle cx="300" cy="150" r="9" fill="#0f172a"/><text x="300" y="138" font-size="10" text-anchor="middle">Hub</text>${route}${veh}</svg></div>
+<div class="card"><b>AI Điều Phối Thông Minh</b><div class="m" style="margin-bottom:8px">Bấm vào đơn để hiển thị tuyến của tài xế trên bản đồ</div>${D.map((x,i)=>`<div class="dsp ${S.sel===i?'on':''}" onclick="set({sel:${i}});log('Điều phối đơn ${x[0]}')"><div class="row"><b>${x[0]} · ${x[1]}</b><span class="pill">${x[2]}</span></div><div class="m">${x[5]}</div></div>`).join('')}</div></div>
+<div><div class="card"><div class="row"><b>IoT Chuỗi Lạnh</b>${alert?'<span class="pill r">⚠ CẢNH BÁO &gt; 8°C</span>':'<span class="pill">Ổn định</span>'}</div><div style="font-size:30px;font-weight:800;color:${alert?'#dc2626':'#15803d'}">${S.temp.toFixed(1)}°C</div><div class="m">Độ ẩm 86% · Ethylene 0,4 ppm</div>${ch(S.hist)}<button class="btn ${S.hot?'':'o'}" style="margin-top:8px;padding:9px" onclick="set({hot:!S.hot})">${S.hot?'Khôi phục bình thường':'Mô phỏng sự cố nhiệt'}</button></div>
+<div class="card" style="background:var(--gl)"><b>🌿 ESG Giảm Phát Thải</b><div style="font-size:28px;font-weight:800;color:var(--gd)">4.250 kg CO₂</div><div class="m">đã giảm trong tháng này</div><button class="btn" style="margin-top:8px;padding:9px" onclick="toast('Đã xuất báo cáo ISO 14064')">Xuất báo cáo ISO 14064</button></div>
+<div class="card"><b>Nhật ký hoạt động</b>${S.logs.length?S.logs.map(x=>`<div class="m" style="padding:3px 0">${x}</div>`).join(''):'<div class="m">Chưa có sự kiện. Thử đặt xe ở giao diện Nông dân.</div>'}</div></div></div></div></div>`}
+function pinOk(){if($('#pn').value==='2026'){HOST=true;listen();set({pin:0,t:'admin'})}else toast('Sai mã')}
+const nd=v=>(v||'').trim().replace(/\/+$/,'');
+let DBU=nd(new URLSearchParams(location.search).get('db'));
+if(!DBU)try{DBU=nd(localStorage.getItem('db'))}catch(e){}
+let ES=null;const seen=new Set();
+function apply(e){const t=e.t;if(e.type=='sell'){S.n.sell++;S.n.ord++;log('Nông dân đăng ký bán '+e.kg+'kg '+e.fruit,t)}else if(e.type=='order'){S.n.ord++;S.n.ship++;log('Người mua đặt '+e.name+' ('+(e.kind=='mid'?'xe tải trung':'container')+')',t)}else if(e.type=='pod'){S.n.pod++;log('e-POD xác nhận, giải ngân ký quỹ',t)}}
+function emit(e){e.t=Date.now();if(DBU)fetch(DBU+'/events.json',{method:'POST',body:JSON.stringify(e)}).catch(()=>{});else apply(e)}
+function add(k,v){if(!v||!v.type||seen.has(k))return;seen.add(k);apply(v)}
+function listen(){if(!DBU||!HOST||ES)return;try{ES=new EventSource(DBU+'/events.json')}catch(e){return}
+ES.addEventListener('put',m=>{try{const d=JSON.parse(m.data);if(d.path==='/'){Object.entries(d.data||{}).sort((a,b)=>a[1].t-b[1].t).forEach(([k,v])=>add(k,v))}else add(d.path.slice(1),d.data)}catch(e){}if(!S.m&&S.t!='qr')draw()});
+ES.onopen=()=>{S.ok=1;if(S.t=='qr')draw()};ES.onerror=()=>{if(S.ok){S.ok=0;if(S.t=='qr')draw()}}}
+const z0=()=>{seen.clear();S.n={sell:0,ord:0,ship:0,pod:0};S.logs=[]};
+function setDb(v){DBU=nd(v);try{localStorage.setItem('db',DBU)}catch(e){}if(ES){ES.close();ES=null}z0();S.ok=0;listen();draw()}
+function resetDb(){fetch(DBU+'/events.json',{method:'DELETE'}).finally(()=>{z0();toast('Đã xóa dữ liệu');draw()})}
+const gl=()=>S.q+(DBU?(S.q.includes('?')?'&':'?')+'db='+encodeURIComponent(DBU):'');
+function mkqr(){const e=$('#qrbox');if(!e)return;e.innerHTML='';if(window.QRCode)new QRCode(e,{text:gl(),width:280,height:280});else e.textContent='Không tải được thư viện QR'}
+function setQ(v){S.q=v.trim();try{localStorage.setItem('q',S.q)}catch(e){}draw()}
+function qrp(){return `<div class="stage"><div style="max-width:520px;width:100%"><div class="card" style="text-align:center"><b style="font-size:18px">Mã QR cho ban giám khảo</b><div class="m">BGK quét mã này để vào bản demo (chọn Nông dân hoặc Người mua)</div><div id="qrbox" style="display:flex;justify-content:center;margin:16px 0"></div><div class="m" style="word-break:break-all">${gl()}</div><label style="text-align:left">Link trang (nếu cần đổi)</label><input value="${S.q}" onchange="setQ(this.value)"></div>
+<div class="card"><div class="row"><b>🔄 Đồng bộ thời gian thực (Firebase)</b><span class="pill ${S.ok?'':'a'}">${!DBU?'Chưa cấu hình':S.ok?'Đã kết nối':'Đang kết nối…'}</span></div><div class="m">Dán Database URL của Firebase Realtime Database. Mã QR sẽ tự kèm địa chỉ này để điện thoại BGK gửi đơn về màn hình Quản trị. Nếu mãi "đang kết nối", hãy kiểm tra lại URL và Rules.</div><input placeholder="https://ten-du-an-default-rtdb.firebasedatabase.app" value="${DBU}" onchange="setDb(this.value)" style="margin-top:8px">${DBU?`<div class="row" style="margin-top:8px"><button class="btn o" style="padding:9px" onclick="emit({type:'sell',kg:100,fruit:'Thử nghiệm'})">Gửi sự kiện thử</button><button class="btn o" style="padding:9px" onclick="resetDb()">Xóa dữ liệu</button></div>`:''}</div></div></div>`}
+/* ---------- KHUNG ---------- */
+function phone(x){return `<div class="stage"><div class="phone">${x}</div></div>`}
+function view(k){return k=='admin'?admin():k=='qr'?qrp():phone(k=='farmer'?farmer():k=='buyer'?buyer():driver())}
+function shell(){
+if(HOST){const T=[['admin','🖥️ Quản trị'],['qr','📱 QR cho BGK'],['farmer','🧑‍🌾 Nông dân'],['buyer','🛒 Người mua'],['driver','🚚 Tài xế']];
+return `<div class="top"><b>🌿 Xe Điện Nông Sản · Máy chủ</b>${T.map(x=>`<button class="tab ${S.t==x[0]?'on':''}" onclick="set({t:'${x[0]}',m:null})">${x[1]}</button>`).join('')}</div>${view(S.t)}`}
+if(!S.r)return `<div class="guest"><div class="stage"><div class="phone"><div class="scr nn"><div class="hd" style="padding:40px 20px"><div style="font-size:42px">🌿</div><div class="big" style="font-size:24px">Xe Điện Nông Sản</div><div style="opacity:.9;margin-top:4px">Logistics xanh từ vườn tới siêu thị</div></div><div class="land"><b style="font-size:17px">Bạn là ai?</b><button class="btn" onclick="set({r:'farmer'})">🧑‍🌾 Tôi là Nông dân (Bán)</button><button class="btn o" onclick="set({r:'buyer'})">🛒 Tôi là Người mua</button><div class="m" style="margin-top:16px">Bản demo cho ban giám khảo · không cần đăng nhập</div>${S.pin?`<div style="margin-top:18px"><input type="password" id="pn" placeholder="Mã ban tổ chức" style="text-align:center"><button class="btn o" style="margin-top:8px;padding:9px" onclick="pinOk()">Vào máy chủ</button></div>`:`<div class="m" style="margin-top:22px;text-decoration:underline;cursor:pointer" onclick="set({pin:1})">Dành cho ban tổ chức</div>`}</div></div></div></div></div>`;
+return `<div class="guest">${phone(S.r=='farmer'?farmer():buyer())}<div style="text-align:center;position:fixed;top:6px;right:10px;z-index:20"><button class="tab" style="font-size:11px;padding:4px 10px" onclick="set({r:null,m:null})">↩ Đổi vai trò</button></div></div>`}
+function draw(){const sc=[...document.querySelectorAll('[data-s]')].map(e=>e.scrollTop),y=scrollY;$('#app').innerHTML=shell();document.querySelectorAll('[data-s]').forEach((e,i)=>e.scrollTop=sc[i]||0);scrollTo(0,y);if(HOST&&S.t=='qr')mkqr()}
+setInterval(()=>{S.tick++;S.temp=S.hot?8.3+Math.random()*1.2:5+Math.random()*.9;S.hist=[...S.hist.slice(-11),+S.temp.toFixed(1)];if(S.fo&&S.fp<100)S.fp=Math.min(100,S.fp+4);if(S.bo&&!S.pod&&S.bp<100)S.bp=Math.min(100,S.bp+3);if(!S.m&&!S.pin&&!(HOST&&S.t=='qr'))draw()},2000);
+onhashchange=()=>location.reload();
+try{S.q=localStorage.getItem('q')||S.q}catch(e){}
+draw();listen();
+</script></body></html>
